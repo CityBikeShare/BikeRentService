@@ -1,5 +1,5 @@
 {
-  "resourcePackages" : [ ],
+  "resourcePackages" : [ "rest.sources" ],
   "prettyPrint" : true,
   "openAPI" : {
     "openapi" : "3.0.1",
