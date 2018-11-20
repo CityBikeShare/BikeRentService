@@ -14,7 +14,7 @@ public class OwnerBean {
     @PersistenceContext(unitName = "cityBikeShare-jpa")
     private EntityManager entityManager;
 
-    private List<Owner> getOwners() {
+    public List<Owner> getOwners() {
         TypedQuery<Owner> query = entityManager.createNamedQuery("Owner.getAll", Owner.class);
         return query.getResultList();
     }
