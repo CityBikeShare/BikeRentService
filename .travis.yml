@@ -16,8 +16,8 @@ cache:
 
 script:
 - mvn clean package -U
-- docker build -t CityBikeShare/BikeRentService .
+- docker build -t citybikeshare/bikerentservice .
 
-# after_success:
-# - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-# - docker push CityBikeShare/BikeRentService
+after_success:
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+- docker push citybikeshare/bikerentservice .
