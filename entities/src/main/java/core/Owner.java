@@ -18,21 +18,17 @@ import java.io.Serializable;
 public class Owner implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer id;
-    @Column
+    private Integer owner_id;
     private String name;
-    @Column
     private String address;
-    @Column
     private String city;
 
-    public Integer getId() {
-        return id;
+    public Integer getOwner_id() {
+        return owner_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOwner_id(Integer owner_id) {
+        this.owner_id = owner_id;
     }
 
     public String getName() {

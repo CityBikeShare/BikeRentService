@@ -19,4 +19,7 @@ public class BikesBean {
         return query.getResultList();
     }
 
+    public Bikes getBikeById(int bikeId) {
+        return entityManager.find(Bikes.class, bikeId);
+    }
 }

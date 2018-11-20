@@ -19,4 +19,8 @@ public class OwnerBean {
         return query.getResultList();
     }
 
+    public Owner getOwnerById(int ownerId){
+        return entityManager.find(Owner.class, ownerId);
+    }
+
 }

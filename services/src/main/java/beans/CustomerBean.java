@@ -1,5 +1,6 @@
 package beans;
 
+import core.Bikes;
 import core.Customer;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -19,4 +20,7 @@ public class CustomerBean {
         return query.getResultList();
     }
 
+    public Customer getCustomerById(int customerId){
+        return entityManager.find(Customer.class, customerId);
+    }
 }

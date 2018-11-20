@@ -18,23 +18,18 @@ import java.io.Serializable;
 public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Integer id;
-    @Column
+    private Integer customer_id;
     private String name;
-    @Column
     private String address;
-    @Column
     private String city;
-    @Column
-    private boolean hasPayed;
+    private boolean hasPaid;
 
-    public Integer getId() {
-        return id;
+    public Integer getCustomer_id() {
+        return customer_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCustomer_id(Integer customer_id) {
+        this.customer_id = customer_id;
     }
 
     public String getName() {
@@ -61,11 +56,11 @@ public class Customer implements Serializable {
         this.city = city;
     }
 
-    public boolean isHasPayed() {
-        return hasPayed;
+    public boolean isHasPaid() {
+        return hasPaid;
     }
 
-    public void setHasPayed(boolean hasPayed) {
-        this.hasPayed = hasPayed;
+    public void setHasPaid(boolean hasPayed) {
+        this.hasPaid = hasPayed;
     }
 }

@@ -1,10 +1,10 @@
 package core;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import java.io.Serializable;
@@ -18,24 +18,22 @@ import java.io.Serializable;
 public class Bikes implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column
+    private Integer bike_id;
     private String type;
-    @Column
     private String size;
-    @Column
     private String description;
-    @Column
     private double price;
-    @Column
     private boolean isAvailable;
+    private Owner owner;
+    private Customer customer;
 
-    public Integer getId() {
-        return id;
+
+    public Integer getBike_id() {
+        return bike_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBike_id(Integer bike_id) {
+        this.bike_id = bike_id;
     }
 
     public String getType() {
@@ -76,5 +74,21 @@ public class Bikes implements Serializable {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    @ManyToOne
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    @ManyToOne
+    public Customer getCustomer(){ return customer; }
+
+    public void setCustomer(Customer customer){
+        this.customer = customer;
     }
 }
