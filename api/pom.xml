@@ -37,6 +37,14 @@
             <artifactId>kumuluzee-jax-rs-jersey</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.kumuluz.ee.openapi</groupId>
+            <artifactId>kumuluzee-openapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kumuluz.ee.openapi</groupId>
+            <artifactId>kumuluzee-openapi-ui</artifactId>
+        </dependency>
+        <dependency>
             <groupId>si.fri.citybike</groupId>
             <artifactId>services</artifactId>
         </dependency>
