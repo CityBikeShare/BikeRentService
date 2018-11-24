@@ -5,6 +5,7 @@
 
         <class>core.Bikes</class>
         <class>core.Users</class>
+        <class>core.BikeRent</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

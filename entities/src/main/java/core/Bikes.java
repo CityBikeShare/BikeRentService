@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class Bikes implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bike_id;
+    private Integer user_id;
     private String type;
     private String size;
     private String description;
@@ -72,4 +74,12 @@ public class Bikes implements Serializable {
         isAvailable = available;
     }
 
+    @ManyToOne
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
 }
