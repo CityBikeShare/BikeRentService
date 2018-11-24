@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import java.io.Serializable;
@@ -24,9 +23,6 @@ public class Bikes implements Serializable {
     private String description;
     private double price;
     private boolean isAvailable;
-    private Owner owner;
-    private Customer customer;
-
 
     public Integer getBike_id() {
         return bike_id;
@@ -76,19 +72,4 @@ public class Bikes implements Serializable {
         isAvailable = available;
     }
 
-    @ManyToOne
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
-    @ManyToOne
-    public Customer getCustomer(){ return customer; }
-
-    public void setCustomer(Customer customer){
-        this.customer = customer;
-    }
 }

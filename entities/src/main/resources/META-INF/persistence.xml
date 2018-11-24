@@ -4,8 +4,7 @@
         <jta-data-source>jdbc/cityBikeShareDS</jta-data-source>
 
         <class>core.Bikes</class>
-        <class>core.Owner</class>
-        <class>core.Customer</class>
+        <class>core.Users</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

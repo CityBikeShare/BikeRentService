@@ -50,6 +50,22 @@ public class BikesSource {
                 Response.status(Response.Status.OK).entity(bikes).build();
     }
 
+    @Operation(
+            description = "Get bike by id",
+            tags = "bike",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Bike by id",
+                            content = @Content(schema = @Schema(implementation = Bikes.class))
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Bike with this id does not exist",
+                            content = @Content(schema = @Schema(implementation = Error.class))
+                    )
+            }
+    )
     @Path("{id}")
     @GET
     public Response getBikeById(@PathParam("id") int id) {
