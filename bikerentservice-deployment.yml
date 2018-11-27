@@ -1,0 +1,49 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: bikerentservice
+spec:
+  selector:
+    app: bikerentservice
+  ports:
+  - protocol: "TCP"
+    port: 8080
+    targetPort: 8080
+    nodePort: 30000
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bikerentservice-deployment
+  labels:
+    app: bikerentservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bikerentservice
+  template:
+    metadata:
+      labels:
+        app: bikerentservice
+    spec:
+      containers:
+      - name: bikerentservice
+        image: citybikeshare/bikerentservice:latest
+        ports:
+        - containerPort: 8080
+          name: server
+          protocol: TCP
+        env:
+          - name: KUMULUZEE_DISCOVERY_CONSUL_AGENT
+            value: http://consul:8500  
+          - name: KUMULUZEE_CONFIG_CONSUL_AGENT
+            value: http://consul:8500
+          - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+            value: jdbc:postgresql://postgres-bikerent:5432/postgres
+          - name: KUMULUZEE_DATASOURCES0_USERNAME
+            value: postgres
+          - name: KUMULUZEE_DATASOURCES0_PASSWORD
+            value: admin
+        

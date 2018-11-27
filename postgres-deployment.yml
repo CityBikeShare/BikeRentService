@@ -1,0 +1,37 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres-bikerent
+spec:
+  selector:
+    app: postgres-bikerent
+  ports:
+  - protocol: "TCP"
+    port: 5432
+    targetPort: 5432
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-bikerent-deployment
+  labels:
+    app: postgres-bikerent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-bikerent
+  template:
+    metadata:
+      labels:
+        app: postgres-bikerent
+    spec:
+      containers:
+      - name: postgres-bikerent
+        image: postgres
+        ports:
+        - containerPort: 5432
+        env:
+          - name: POSTGRES_PASSWORD
+            value: admin
