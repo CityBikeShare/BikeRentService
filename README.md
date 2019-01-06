@@ -1,5 +1,7 @@
 ### BikeRentService
 
+[![Build Status](https://travis-ci.org/CityBikeShare/BikeRentService.svg?branch=master)](https://travis-ci.org/CityBikeShare/BikeRentService)
+
 - Service allows a user to rent a bike, or cancel rent later.
 
 #### Requests on kubernetes
