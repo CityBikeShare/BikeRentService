@@ -1,23 +1,11 @@
-package core;
+package external;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
-@Entity(name = "Bikes")
-@NamedQueries(
-        value = {
-                @NamedQuery(name = "Bikes.getAll", query = "SELECT b from Bikes b")
-        }
-)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Bikes implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bike_id;
     private Integer user_id;
     private String type;
@@ -74,7 +62,6 @@ public class Bikes implements Serializable {
         isAvailable = available;
     }
 
-    @ManyToOne
     public Integer getUser_id() {
         return user_id;
     }

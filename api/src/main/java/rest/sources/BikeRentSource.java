@@ -1,12 +1,16 @@
 package rest.sources;
 
-import beans.BikeRentBean;
+import beans.core.BikeRentBean;
+import beans.external.BikesBean;
 import core.BikeRent;
-import core.Bikes;
+import external.Bikes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -14,7 +18,6 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -29,6 +32,9 @@ import java.util.List;
 public class BikeRentSource {
     @Inject
     private BikeRentBean bikeRentBean;
+
+    @Inject
+    private BikesBean bikeBean;
 
     @Operation(
             description = "Get all bike rent",
@@ -72,10 +78,9 @@ public class BikeRentSource {
     )
     @GET
     @Path("{id}")
-    public Response getAllBikes(@PathParam("id") int bikeRentId) {
+    public Response getBikeRentById(@PathParam("id") int bikeRentId) {
         BikeRent bikeRent = bikeRentBean.getBikeRentById(bikeRentId);
         return bikeRent == null ? Response.status(Response.Status.NOT_FOUND).build() : Response.ok(bikeRent).build();
-
     }
 
     @Operation(
@@ -94,16 +99,29 @@ public class BikeRentSource {
                     )
             }
     )
-    @PUT
-    public Response rentBike(@RequestBody BikeRent bikeRent) {
-        if (bikeRentBean.getBikeRentById(bikeRent.getBike_id()) == null || bikeRentBean.getBikeRentById(bikeRent.getUser_id()) == null) {
+    @POST
+    @Path("rent")
+    public Response rentBike(@QueryParam("bikeid") int bikeId, @QueryParam("userid") int userId) {
+        if(!bikeBean.isBikeAvailable(bikeId)){
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
-        bikeRentBean.updateBikeDebt(bikeRent.getBike_id(), bikeRent.isDebtSettled());
-        bikeRentBean.insertBikeRent(bikeRent);
+        BikeRent bikeRent = bikeRentBean.newRent(bikeId, userId);
+
+        Bikes bike = bikeBean.getBikeById(bikeId);
+        bike.setAvailable(false);
+        bikeBean.updateBike(bike);
 
         return Response.ok(bikeRent).build();
+    }
+
+    @PUT
+    @Path("return/{bikeid}")
+    public Response returnBike(@PathParam("bikeid") int bikeId){
+        Bikes bike = bikeBean.getBikeById(bikeId);
+        bike.setAvailable(true);
+        bikeBean.updateBike(bike);
+        return Response.ok(bikeRentBean.returnBike(bikeId)).build();
     }
 
     @DELETE
