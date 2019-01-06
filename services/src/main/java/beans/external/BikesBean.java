@@ -5,9 +5,6 @@ import external.Bikes;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -36,14 +33,14 @@ public class BikesBean {
         return null;
     }
 
-    public boolean isBikeAvailable(int bikeId){
-        if(bikeWebTarget.isPresent()){
+    public boolean isBikeAvailable(int bikeId) {
+        if (bikeWebTarget.isPresent()) {
             return getBikeById(bikeId).isAvailable();
         }
         return false;
     }
 
-    public Bikes updateBike(Bikes bike){
+    public Bikes updateBike(Bikes bike) {
         int bikeId = bike.getBike_id();
 
         if (bikeWebTarget.isPresent()) {

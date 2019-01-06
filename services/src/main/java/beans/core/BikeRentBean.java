@@ -1,6 +1,5 @@
 package beans.core;
 
-import beans.external.BikesBean;
 import core.BikeRent;
 import external.Bikes;
 
@@ -35,7 +34,7 @@ public class BikeRentBean {
     }
 
     @Transactional
-    public BikeRent newRent(int bikeId, int userId){
+    public BikeRent newRent(int bikeId, int userId) {
         BikeRent bikeRent = new BikeRent();
 
         bikeRent.setBike_id(bikeId);
@@ -51,7 +50,7 @@ public class BikeRentBean {
     }
 
     @Transactional
-    public BikeRent returnBike(int bikeId){
+    public BikeRent returnBike(int bikeId) {
         BikeRent bikeRent = getBikeRentById(bikeId);
         bikeRent.setRentEnd(Date.from(Instant.now()));
         bikeRent = entityManager.merge(bikeRent);
