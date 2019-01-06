@@ -2,6 +2,7 @@ package beans.core;
 
 import core.BikeRent;
 import external.Bikes;
+import org.eclipse.microprofile.metrics.annotation.Metered;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -17,15 +18,18 @@ public class BikeRentBean {
     @PersistenceContext(unitName = "cityBikeShare-jpa")
     private EntityManager entityManager;
 
+    @Metered(name = "getAllBikeRent")
     public List<BikeRent> getAllBikeRent() {
         TypedQuery<BikeRent> query = entityManager.createNamedQuery("BikeRent.getAll", BikeRent.class);
         return query.getResultList();
     }
 
+    @Metered(name = "getBikeRentById")
     public BikeRent getBikeRentById(int bikeRentId) {
         return entityManager.find(BikeRent.class, bikeRentId);
     }
 
+    @Metered(name = "insertBikeRent")
     @Transactional
     public BikeRent insertBikeRent(BikeRent bikeRent) {
         entityManager.persist(bikeRent);
@@ -33,6 +37,7 @@ public class BikeRentBean {
         return bikeRent;
     }
 
+    @Metered(name = "newRent")
     @Transactional
     public BikeRent newRent(int bikeId, int userId) {
         BikeRent bikeRent = new BikeRent();
@@ -49,6 +54,7 @@ public class BikeRentBean {
         return bikeRent;
     }
 
+    @Metered(name = "returnBike")
     @Transactional
     public BikeRent returnBike(int bikeId) {
         BikeRent bikeRent = getBikeRentById(bikeId);
@@ -58,6 +64,7 @@ public class BikeRentBean {
         return bikeRent;
     }
 
+    @Metered(name = "updateBikeDebt")
     @Transactional
     public Bikes updateBikeDebt(int bikeId, boolean state) {
         Bikes bike = entityManager.find(Bikes.class, bikeId);
@@ -65,6 +72,7 @@ public class BikeRentBean {
         return bike;
     }
 
+    @Metered(name = "deleteBikeRent")
     @Transactional
     public boolean deleteBikeRent(int bikeRentId) {
         try {
