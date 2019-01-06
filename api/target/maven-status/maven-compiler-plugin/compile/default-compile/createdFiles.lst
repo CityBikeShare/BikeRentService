@@ -1,4 +1,0 @@
-META-INF\services\javax.ws.rs.core.Application
-rest\SourceFrame.class
-rest\sources\BikesSource.class
-api-specs\sources\openapi-configuration.json
