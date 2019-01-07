@@ -2,6 +2,7 @@ package rest.sources;
 
 import beans.core.BikeRentBean;
 import beans.external.BikesBean;
+import com.kumuluz.ee.logs.cdi.Log;
 import core.BikeRent;
 import external.Bikes;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,6 +29,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("bikerent")
+@Log
 @ApplicationScoped
 public class BikeRentSource {
     @Inject
